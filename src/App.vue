@@ -50,7 +50,7 @@
         <div class="col-md-6">
           <h3>Precipitação</h3>
           <p>{{results.current.precip_mm}} mm</p>
-        </div>
+        </div><!--col-md-6-->
 
         <hr />
 
@@ -71,9 +71,26 @@
           <div class="row">
             <p>Chance de chover: {{results.forecast.forecastday[0].day.daily_chance_of_rain}}%</p>
             <p>Chance de nevar: {{results.forecast.forecastday[0].day.daily_chance_of_snow}}%</p>
-          </div>
-
+          </div><!--row-->
         </div><!--col-md-6-->
+
+          <hr />
+
+          <div class="col-md-6">
+            <h3>Previsão para as próximas horas</h3>
+            <div class="rowFlex">
+              <div class="item" v-for="n in 23">
+                <p>{{(results.forecast.forecastday[0].hour[n].time).split(' ')[1]}}</p>
+                <img :src="results.forecast.forecastday[0].hour[n].condition.icon" alt="">
+                <span>{{(results.forecast.forecastday[0].hour[n].condition.text)}}</span>
+                <br />
+                <span style="font-weight: bold">{{results.forecast.forecastday[0].hour[n].temp_c}}°C</span>
+                <span style="font-weight: bold">{{results.forecast.forecastday[0].hour[n].temp_f}}°F</span>
+                <span>Chuva: {{results.forecast.forecastday[0].hour[n].chance_of_rain}}%</span>
+                <span v-if="results.forecast.forecastday[0].hour[n].precip_mm > 0">Precipitação: {{results.forecast.forecastday[0].hour[n].precip_mm}}mm</span>
+              </div><!--item-->
+            </div><!--rowFlex-->
+          </div><!--col-md-6-->
       </div><!--mainrow-->
 
       <hr />
@@ -213,5 +230,36 @@
 
   ul li p {
     font-size: 24px;
+  }
+
+  .rowFlex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .rowFlex .item {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 40px;
+    margin: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  }
+
+  .rowFlex .item p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: -5px;
+  }
+
+  .rowFlex .item img {
+    margin: 0 auto;
+    max-width: 64px;
+    max-height: 64px;
+    width: 100%;
+    height: 100%;
   }
 </style>
