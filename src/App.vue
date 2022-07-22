@@ -76,14 +76,15 @@
 
           <hr />
 
-          <div class="col-md-6">
+          <div style="max-width: 1000px; width: 100%; margin: 0 auto; text-align: center" class="col-md-6">
             <h3>Previsão para as próximas horas</h3>
+            <h5>Do dia {{((results.forecast.forecastday[0].hour[0].time).split(' ')[0]).split('-')[2]}}/{{((results.forecast.forecastday[0].hour[0].time).split(' ')[0]).split('-')[1]}}</h5>
             <div class="rowFlex">
               <div class="item" v-for="n in 23">
                 <p>{{(results.forecast.forecastday[0].hour[n].time).split(' ')[1]}}</p>
                 <img :src="results.forecast.forecastday[0].hour[n].condition.icon" alt="">
                 <span>{{(results.forecast.forecastday[0].hour[n].condition.text)}}</span>
-                <br />
+                <!-- <br /> -->
                 <span style="font-weight: bold">{{results.forecast.forecastday[0].hour[n].temp_c}}°C</span>
                 <span style="font-weight: bold">{{results.forecast.forecastday[0].hour[n].temp_f}}°F</span>
                 <span>Chuva: {{results.forecast.forecastday[0].hour[n].chance_of_rain}}%</span>
@@ -235,6 +236,7 @@
   .rowFlex {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .rowFlex .item {
