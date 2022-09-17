@@ -150,6 +150,7 @@
 
       setLocateHistorico(el) {
         this.locate = el;
+        this.getData();
       },
 
       unsetLocate() {
